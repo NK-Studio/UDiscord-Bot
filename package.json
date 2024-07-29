@@ -3,6 +3,7 @@
   "displayName": "UDiscord Bot",
   "version": "1.0.0",
   "unity": "6000.0",
+  "type": "Library",
   "description": "Discord Bot for Unity",
   "author": {
     "name": "NK Studio"
@@ -10,9 +11,8 @@
   "keywords": [
     "Discord"
   ],
-     "repository": {
+  "repository": {
     "url": "https://github.com/NK-Studio/UDiscod-Bot",
     "type": "git"
-  },
-  "type": "Library"
+  }
 }
