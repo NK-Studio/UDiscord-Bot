@@ -10,5 +10,9 @@
   "keywords": [
     "Discord"
   ],
+     "repository": {
+    "url": "https://github.com/NK-Studio/UDiscod-Bot",
+    "type": "git"
+  },
   "type": "Library"
 }
