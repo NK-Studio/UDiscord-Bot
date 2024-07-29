@@ -1,0 +1,14 @@
+﻿{
+  "name": "com.nkstudio.udiscordbot",
+  "displayName": "UDiscord Bot",
+  "version": "1.0.0",
+  "unity": "6000",
+  "description": "Discord Bot for Unity",
+  "author": {
+    "name": "NK Studio"
+  },
+  "keywords": [
+    "Discord"
+  ],
+  "type": "Library"
+}
