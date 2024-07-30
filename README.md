@@ -6,5 +6,16 @@
 
 # 사용 방법
 ``` C#
-
+DiscordBot
+    .Create(
+        "디스코드 웹 훅")
+    .WithContent("메세지")
+    .AddEmbed(
+        Embed
+            .Create()
+            .WithTitle("임베드 메세지 제목")
+            .WithDescription("임베드 메세지 내용")
+            .SetColor(Color.red) // 왼쪽 선 색상
+    )
+    .Send();
 ```
