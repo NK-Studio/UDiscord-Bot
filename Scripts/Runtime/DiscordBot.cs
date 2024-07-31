@@ -1,6 +1,5 @@
-﻿using System.Text;
-using Newtonsoft.Json.Linq;
-using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Text;
 using UnityEngine.Networking;
 
 namespace NKStudio.Discord
@@ -20,38 +19,37 @@ namespace NKStudio.Discord
         
         public UnityWebRequest CreateWebRequest(Options options)
         {
-            JObject embedValue = new JObject();
-            JArray embedArray = new JArray();
-            JObject json = new JObject();
-        
+            var json = new Dictionary<string, object>();
+
             if (!string.IsNullOrEmpty(options.content))
-                json.Add("content", options.content);
-        
+                json["content"] = options.content;
+
             if (options.embeds != null)
             {
+                var embedValue = new Dictionary<string, object>();
+
                 if (!string.IsNullOrEmpty(options.embeds.title))
-                    embedValue.Add("title", options.embeds.title);
-        
+                    embedValue["title"] = options.embeds.title;
+
                 if (!string.IsNullOrEmpty(options.embeds.description))
-                    embedValue.Add("description", options.embeds.description);
-        
+                    embedValue["description"] = options.embeds.description;
+
                 if (options.embeds.color != 0)
-                    embedValue.Add("color", options.embeds.color);
-        
-                embedArray.Add(embedValue);
-        
-                json.Add("embeds", embedArray);
+                    embedValue["color"] = options.embeds.color;
+
+                var embedArray = new List<object> { embedValue };
+                json["embeds"] = embedArray;
             }
-        
+
             var downloadHandler = new DownloadHandlerBuffer();
-            var uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json.ToString()))
+            var uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(MiniJSON.Json.Serialize(json)))
             {
                 contentType = "application/json",
             };
-        
-            var request =
-                new UnityWebRequest(WebHookURL, UnityWebRequest.kHttpVerbPOST, downloadHandler, uploadHandler);
+
+            var request = new UnityWebRequest(WebHookURL, UnityWebRequest.kHttpVerbPOST, downloadHandler, uploadHandler);
             return request;
         }
+
     }
 }
