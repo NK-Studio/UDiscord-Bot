@@ -107,6 +107,22 @@ namespace NKStudio.Discord
                     embedValue["image"] = imageValue;
                 }
 
+                if (options.Embeds.Video != null)
+                {
+                    var videoValue = new Dictionary<string, object>();
+                    
+                    if (!string.IsNullOrEmpty(options.Embeds.Video.URL))
+                        videoValue["url"] = options.Embeds.Video.URL;
+
+                    if (options.Embeds.Video.Width != null)
+                        videoValue["width"] = options.Embeds.Video.Width;
+                    
+                    if (options.Embeds.Video.Height != null)
+                        videoValue["height"] = options.Embeds.Video.Height;
+                    
+                    embedValue["video"] = videoValue;
+                }
+
                 // Thumbnail
                 if (!string.IsNullOrEmpty(options.Embeds.ThumbnailURL))
                 {

@@ -1,4 +1,6 @@
-﻿namespace NKStudio.Discord
+﻿using NKStudio.Discord;
+
+namespace NKStudio.Discord
 {
     #region DiscordBotExtensions
 
@@ -197,6 +199,18 @@
         }
 
         /// <summary>
+        /// [Experimental] Embed 인스턴스에 비디오를 추가합니다.
+        /// </summary>
+        /// <param name="embed">Embed 인스턴스</param>
+        /// <param name="video">비디오 인스턴스</param>
+        /// <returns>업데이트된 Embed 인스턴스</returns>
+        public static Embed AddVideo(this Embed embed, Experimental.Video video)
+        {
+            embed.Video = video;
+            return embed;
+        }
+
+        /// <summary>
         /// Footer 인스턴스에 텍스트를 설정합니다.
         /// </summary>
         /// <param name="footer">Footer 인스턴스</param>
@@ -273,6 +287,49 @@
         {
             author.IconURL = iconURL;
             return author;
+        }
+    }
+
+    #endregion
+
+    #region Video
+
+    public static class VideoExtensions
+    {
+        /// <summary>
+        /// 비디오 인스턴스에 URL을 설정합니다.
+        /// </summary>
+        /// <param name="video">비디오 인스턴스</param>
+        /// <param name="url">비디오 URL</param>
+        /// <returns>업데이트된 비디오 인스턴스</returns>
+        public static Experimental.Video WithURL(this Experimental.Video video, string url)
+        {
+            video.URL = url;
+            return video;
+        }
+
+        /// <summary>
+        /// 비디오 인스턴스에 너비를 설정합니다.
+        /// </summary>
+        /// <param name="video">비디오 인스턴스</param>
+        /// <param name="width">비디오 너비</param>
+        /// <returns>업데이트된 비디오 인스턴스</returns>
+        public static Experimental.Video WithWidth(this Experimental.Video video, int width)
+        {
+            video.Width = width;
+            return video;
+        }
+
+        /// <summary>
+        /// 비디오 인스턴스에 높이를 설정합니다.
+        /// </summary>
+        /// <param name="video">비디오 인스턴스</param>
+        /// <param name="height">비디오 높이</param>
+        /// <returns>업데이트된 비디오 인스턴스</returns>
+        public static Experimental.Video WithHeight(this Experimental.Video video, int height)
+        {
+            video.Height = height;
+            return video;
         }
     }
 

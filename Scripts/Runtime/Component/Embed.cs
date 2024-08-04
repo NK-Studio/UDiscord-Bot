@@ -27,6 +27,11 @@
         /// 임베드의 푸터 정보입니다.
         /// </summary>
         internal Footer Footer;
+
+        /// <summary>
+        /// 임베드의 비디오 정보입니다.
+        /// </summary>
+        internal Experimental.Video Video;
         
         /// <summary>
         /// 임베드의 이미지 URL입니다.
