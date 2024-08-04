@@ -1,5 +1,4 @@
-﻿
-namespace NKStudio.Discord
+﻿namespace NKStudio.Discord.Module
 {
     /// <summary>
     /// https://discord.com/developers/docs/resources/webhook#execute-webhook-jsonform-params

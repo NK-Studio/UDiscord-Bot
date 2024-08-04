@@ -1,8 +1,7 @@
 {
-    "name": "UDiscordBot.Runtime",
+    "name": "UDiscord.Runtime",
     "rootNamespace": "",
     "references": [
-        "GUID:cb073d338294f40879437d232bc987fc",
         "GUID:bb5607d94795b40328925f7443372627"
     ],
     "includePlatforms": [],

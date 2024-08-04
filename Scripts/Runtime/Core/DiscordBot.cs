@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using NKStudio.Discord.Module;
 using UnityEngine.Networking;
 
 namespace NKStudio.Discord
@@ -18,7 +19,7 @@ namespace NKStudio.Discord
         {
             var discordBot = new DiscordBot();
             discordBot.WebHookURL = webhook;
-            
+
             return discordBot;
         }
 
@@ -48,8 +49,8 @@ namespace NKStudio.Discord
                 var embedValue = new Dictionary<string, object>();
 
                 // Title
-                if (!string.IsNullOrEmpty(options.Embeds.title))
-                    embedValue["title"] = options.Embeds.title;
+                if (options.Embeds.Title != null)
+                    embedValue["title"] = options.Embeds.Title;
 
                 // URL
                 if (!string.IsNullOrEmpty(options.Embeds.URL))
@@ -58,14 +59,25 @@ namespace NKStudio.Discord
                 // Description
                 if (!string.IsNullOrEmpty(options.Embeds.Description))
                     embedValue["description"] = options.Embeds.Description;
+                
+                // Timestamp
+                if (options.Embeds.Timestamp != null)
+                {
+                    var format = options.Embeds.Timestamp.Format;
+                    
+                    if (string.IsNullOrEmpty(format)) 
+                        format = "yyyy-MM-ddTHH:mm:ssZ";
+                    
+                    embedValue["timestamp"] = options.Embeds.Timestamp.Time.ToString(format);
+                }
 
                 // Color
-                if (options.Embeds.Color != 0)
-                    embedValue["color"] = options.Embeds.Color;
+                if (options.Embeds.Color != null)
+                    embedValue["color"] = options.Embeds.Color.Value;
 
                 // TTS
                 jsonDictionary["tts"] = options.tts;
-                
+
                 // Fields
                 var embedArray = new List<object> { embedValue };
                 jsonDictionary["embeds"] = embedArray;
@@ -100,26 +112,28 @@ namespace NKStudio.Discord
                 }
 
                 // Image
-                if (!string.IsNullOrEmpty(options.Embeds.ImageURL))
+                if (options.Embeds.Image != null)
                 {
                     var imageValue = new Dictionary<string, object>();
-                    imageValue["url"] = options.Embeds.ImageURL;
+                    if (!string.IsNullOrEmpty(options.Embeds.Image))
+                        imageValue["url"] = options.Embeds.Image;
+
                     embedValue["image"] = imageValue;
                 }
 
                 if (options.Embeds.Video != null)
                 {
                     var videoValue = new Dictionary<string, object>();
-                    
+
                     if (!string.IsNullOrEmpty(options.Embeds.Video.URL))
                         videoValue["url"] = options.Embeds.Video.URL;
 
                     if (options.Embeds.Video.Width != null)
                         videoValue["width"] = options.Embeds.Video.Width;
-                    
+
                     if (options.Embeds.Video.Height != null)
                         videoValue["height"] = options.Embeds.Video.Height;
-                    
+
                     embedValue["video"] = videoValue;
                 }
 
@@ -140,6 +154,67 @@ namespace NKStudio.Discord
             var request =
                 new UnityWebRequest(WebHookURL, UnityWebRequest.kHttpVerbPOST, downloadHandler, uploadHandler);
             return request;
+        }
+    }
+
+    public static class DiscordBotExtensions
+    {
+        /// <summary>
+        /// DiscordBot 인스턴스에 메시지 내용을 설정합니다.
+        /// </summary>
+        /// <param name="discordBot">DiscordBot 인스턴스</param>
+        /// <param name="content">메시지 내용</param>
+        /// <returns>업데이트된 DiscordBot 인스턴스</returns>
+        public static DiscordBot WithContent(this DiscordBot discordBot, string content)
+        {
+            discordBot.Options.Content = content;
+            return discordBot;
+        }
+
+        /// <summary>
+        /// DiscordBot 인스턴스에 사용자 이름을 설정합니다.
+        /// </summary>
+        /// <param name="discordBot">DiscordBot 인스턴스</param>
+        /// <param name="username">사용자 이름</param>
+        /// <returns>업데이트된 DiscordBot 인스턴스</returns>
+        public static DiscordBot WithUsername(this DiscordBot discordBot, string username)
+        {
+            discordBot.Options.Username = username;
+            return discordBot;
+        }
+
+        /// <summary>
+        /// DiscordBot 인스턴스에 아바타 URL을 설정합니다.
+        /// </summary>
+        /// <param name="discordBot">DiscordBot 인스턴스</param>
+        /// <param name="avatarUrl">아바타 URL</param>
+        /// <returns>업데이트된 DiscordBot 인스턴스</returns>
+        public static DiscordBot WithAvatarURL(this DiscordBot discordBot, string avatarUrl)
+        {
+            discordBot.Options.AvatarUrl = avatarUrl;
+            return discordBot;
+        }
+
+        /// <summary>
+        /// DiscordBot 인스턴스에 TTS 옵션을 설정합니다.
+        /// </summary>
+        /// <param name="discordBot">DiscordBot 인스턴스</param>
+        /// <param name="tts">TTS 옵션</param>
+        /// <returns>업데이트된 DiscordBot 인스턴스</returns>
+        public static DiscordBot WithTTS(this DiscordBot discordBot, bool tts)
+        {
+            discordBot.Options.tts = tts;
+            return discordBot;
+        }
+
+        /// <summary>
+        /// DiscordBot 인스턴스를 사용하여 메시지를 전송합니다.
+        /// </summary>
+        /// <param name="discordBot">DiscordBot 인스턴스</param>
+        public static void Send(this DiscordBot discordBot)
+        {
+            var request = discordBot.CreateWebRequest(discordBot.Options);
+            request.SendWebRequest();
         }
     }
 }
