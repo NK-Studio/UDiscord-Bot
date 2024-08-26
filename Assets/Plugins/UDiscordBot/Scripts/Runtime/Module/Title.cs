@@ -8,7 +8,7 @@ namespace NKStudio.Discord.Module
         /// <param name="embed">Embed 인스턴스</param>
         /// <param name="title">추가할 제목</param>
         /// <returns>업데이트된 Embed 인스턴스</returns>
-        public static Embed AddTitle(this Embed embed, string title)
+        public static Embed WithTitle(this Embed embed, string title)
         {
             embed.Title = title;
             return embed;

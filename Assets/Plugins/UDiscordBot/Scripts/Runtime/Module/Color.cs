@@ -10,7 +10,7 @@ namespace NKStudio.Discord.Module
         /// <param name="embed">Embed 인스턴스</param>
         /// <param name="color">컬러 인스턴스</param>
         /// <returns>업데이트된 Embed 인스턴스</returns>
-        public static Embed AddColor(this Embed embed, Color32 color)
+        public static Embed WithColor(this Embed embed, Color32 color)
         {
             embed.Color = ToColorCode(color);
             return embed;

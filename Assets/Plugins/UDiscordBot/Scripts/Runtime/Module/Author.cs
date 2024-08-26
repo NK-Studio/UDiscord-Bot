@@ -41,7 +41,7 @@ namespace NKStudio.Discord.Module
         /// <param name="embed">Embed 인스턴스</param>
         /// <param name="author">Author 인스턴스</param>
         /// <returns>업데이트된 Embed 인스턴스</returns>
-        public static Embed AddAuthor(this Embed embed, Author author)
+        public static Embed WithAuthor(this Embed embed, Author author)
         {
             embed.Author = author;
             return embed;

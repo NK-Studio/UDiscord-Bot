@@ -46,7 +46,7 @@ namespace NKStudio.Discord.Experimental
         /// <param name="embed">Embed 인스턴스</param>
         /// <param name="video">비디오 인스턴스</param>
         /// <returns>업데이트된 Embed 인스턴스</returns>
-        public static Embed AddVideo(this Embed embed, Experimental.Video video)
+        public static Embed WithVideo(this Embed embed, Experimental.Video video)
         {
             embed.Video = video;
             return embed;

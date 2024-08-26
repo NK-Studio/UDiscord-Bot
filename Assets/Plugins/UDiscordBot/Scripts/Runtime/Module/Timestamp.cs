@@ -35,7 +35,7 @@ namespace NKStudio.Discord.Module
         /// <param name="embed">Embed 인스턴스</param>
         /// <param name="timestamp">추가할 Timestamp 인스턴스</param>
         /// <returns>업데이트된 Embed 인스턴스</returns>
-        public static Embed AddTimestamp(this Embed embed, Timestamp timestamp)
+        public static Embed WithTimestamp(this Embed embed, Timestamp timestamp)
         {
             embed.Timestamp = timestamp;
             return embed;

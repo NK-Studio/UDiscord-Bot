@@ -36,7 +36,7 @@ namespace NKStudio.Discord.Module
         /// <param name="embed">Embed 인스턴스</param>
         /// <param name="footer">Footer 인스턴스</param>
         /// <returns>업데이트된 Embed 인스턴스</returns>
-        public static Embed AddFooter(this Embed embed, Footer footer)
+        public static Embed WithFooter(this Embed embed, Footer footer)
         {
             embed.Footer = footer;
             return embed;

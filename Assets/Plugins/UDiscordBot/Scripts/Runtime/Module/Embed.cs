@@ -68,7 +68,7 @@
         /// <param name="discordBot">DiscordBot 인스턴스</param>
         /// <param name="embed">Embed 인스턴스</param>
         /// <returns>업데이트된 DiscordBot 인스턴스</returns>
-        public static DiscordBot AddEmbed(this DiscordBot discordBot, Embed embed)
+        public static DiscordBot WithEmbed(this DiscordBot discordBot, Embed embed)
         {
             discordBot.Options.Embeds = embed;
             return discordBot;
@@ -80,7 +80,7 @@
         /// <param name="embed">Embed 인스턴스</param>
         /// <param name="description">설명</param>
         /// <returns>업데이트된 Embed 인스턴스</returns>
-        public static Embed AddDescription(this Embed embed, string description)
+        public static Embed WithDescription(this Embed embed, string description)
         {
             embed.Description = description;
             return embed;

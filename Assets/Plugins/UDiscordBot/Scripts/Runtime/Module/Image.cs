@@ -8,7 +8,7 @@ namespace NKStudio.Discord.Module
         /// <param name="embed">Embed 인스턴스</param>
         /// <param name="path">이미지 경로</param>
         /// <returns>업데이트된 Embed 인스턴스</returns>
-        public static Embed AddImage(this Embed embed, string path)
+        public static Embed WithImage(this Embed embed, string path)
         {
             embed.Image = path;
             return embed;
